@@ -1,0 +1,76 @@
+================================================================================
+                    HƯỚNG DẪN CÀI ĐẶT PTIT CHATBOT EXTENSION
+================================================================================
+
+1. CÀI ĐẶT EXTENSION
+--------------------
+   a) Mở Chrome hoặc Edge
+   b) Truy cập: chrome://extensions/ (Chrome) hoặc edge://extensions/ (Edge)
+   c) Bật "Developer mode" (góc phải trên)
+   d) Click "Load unpacked"
+   e) Chọn thư mục "extension_new" này
+   f) Extension sẽ xuất hiện với icon trong thanh công cụ
+
+2. YÊU CẦU BACKEND
+------------------
+   Backend phải đang chạy tại: http://localhost:3000
+
+   Các endpoint cần có:
+   - GET  /health           : Kiểm tra server hoạt động
+   - POST /check-user       : Kiểm tra user có API key chưa
+   - POST /test-api-key     : Test API key hợp lệ
+   - POST /save-api-key     : Lưu API key cho user
+   - POST /get-token        : Lấy session token
+   - POST /release-token    : Giải phóng token
+   - POST /api/ask          : Gửi câu hỏi và nhận trả lời
+
+3. CÁCH SỬ DỤNG
+---------------
+   POPUP (Click icon extension):
+   - Mở popup chatbot
+   - Nhập câu hỏi và Enter để gửi
+   - Click 🗑️ để xóa lịch sử
+
+   CONTENT SCRIPT (Trên trang code.ptit.edu.vn/student*):
+   - Click icon 🤖 góc phải dưới để mở chat
+   - Chatbot tự động đọc đề bài khi ở trang question
+   - Click ➖ để thu nhỏ
+   - Trong giờ kiểm tra, chatbot sẽ không cung cấp lời giải
+
+4. LẤY GEMINI API KEY
+---------------------
+   a) Truy cập: https://aistudio.google.com/apikey
+   b) Đăng nhập Google
+   c) Click "Create API key"
+   d) Copy API key và dán vào popup khi được yêu cầu
+
+5. CẤU TRÚC FILE
+----------------
+   extension_new/
+   ├── manifest.json     - Cấu hình extension
+   ├── popup.html        - Giao diện popup
+   ├── popup.css         - Style cho popup
+   ├── popup.js          - Logic popup
+   ├── content.js        - Script inject vào trang web
+   ├── content.css       - Style cho content script
+   ├── background.js     - Service worker
+   └── icon.png          - Icon extension
+
+6. TÍNH NĂNG
+------------
+   ✓ Giao diện đẹp, dễ nhìn
+   ✓ Bubble bot màu trắng, chữ tối (không in đậm toàn bộ)
+   ✓ Token management và API key management
+   ✓ Context-aware: tự đọc đề bài khi ở trang question
+   ✓ Conversation history lưu trong localStorage
+   ✓ Auto scroll lên đầu câu trả lời sau khi AI phản hồi
+   ✓ Chặn giải bài trong giờ kiểm tra
+
+7. KHẮC PHỤC LỖI
+----------------
+   - "Không thể kết nối server": Kiểm tra backend đang chạy tại localhost:3000
+   - "API key không hợp lệ": Tạo API key mới tại aistudio.google.com/apikey
+   - Extension không hiện: Reload extension trong chrome://extensions/
+   - Chat không lưu: Xóa cache và reload trang
+
+================================================================================

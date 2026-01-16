@@ -1,0 +1,41 @@
+{
+  "manifest_version": 3,
+  "name": "PTIT Chatbot Assistant",
+  "version": "3.0",
+  "description": "Trợ lý AI hỗ trợ sinh viên PTIT trên code.ptit.edu.vn",
+  "permissions": [
+    "storage",
+    "activeTab"
+  ],
+  "host_permissions": [
+    "https://code.ptit.edu.vn/*",
+    "http://localhost:3000/*"
+  ],
+  "background": {
+    "service_worker": "background/background.js"
+  },
+  "web_accessible_resources": [
+    {
+      "resources": ["assets/icons/icon.png"],
+      "matches": ["https://code.ptit.edu.vn/*"]
+    }
+  ],
+  "content_scripts": [
+    {
+      "matches": ["https://code.ptit.edu.vn/*"],
+      "css": ["content/content.css"],
+      "js": ["content/content.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "action": {
+    "default_popup": "popup/popup.html",
+    "default_icon": "assets/icons/icon.png",
+    "default_title": "PTIT Chatbot Assistant"
+  },
+  "icons": {
+    "16": "assets/icons/icon.png",
+    "48": "assets/icons/icon.png",
+    "128": "assets/icons/icon.png"
+  }
+}
